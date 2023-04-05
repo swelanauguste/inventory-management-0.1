@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-yyp*qc2umth@=yp2tz9)q^ciy+bh+(4z7g%j1-xd&a+5!91-p@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "https://inventory.kingship.info"]
+ALLOWED_HOSTS = ["localhost", "inventory.kingship.info"]
 
 CSRF_TRUSTED_ORIGINS = ["https://inventory.kingship.info"]
 

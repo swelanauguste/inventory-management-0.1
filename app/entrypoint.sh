@@ -13,7 +13,8 @@
 # python manage.py flush --noinput
 python manage.py makemigrations
 python manage.py migrate
-python manage.py createsuperuser --username kingship --email kingship.lc@gmail.com --noinput
+# python manage.py migrate --run-syncdb
+# python manage.py createsuperuser --username kingship --email kingship.lc@gmail.com --noinput
 
 python manage.py collectstatic --noinput
 
