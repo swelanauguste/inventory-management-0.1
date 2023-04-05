@@ -1,0 +1,62 @@
+<div class="rounded-0 border-end py-5 mx-5 mt-lg-5">
+        {% include 'go_back.html' %}
+
+        <li> <a class="text-dark"
+                        href="{% url 'home' %}">Home</a></li>
+        <li class="d-flex">
+                <a class="text-dark"
+                        href="{% url 'supplier-list' %}">Suppliers</a>
+                <a class="float-"
+                        href="{% url 'supplier-create' %}">
+                        <span
+                                class="material-symbols-outlined text-dark small px-5">
+                                add_circle
+                        </span>
+                </a>
+        </li>
+        <li class="d-flex">
+                <a class="text-dark"
+                        href="{% url 'item-list' %}">Items</a>
+                <a class="float-"
+                        href="{% url 'supplier-create' %}">
+                        <span
+                                class="material-symbols-outlined text-dark small px-5">
+                                add_circle
+                        </span>
+                </a>
+        </li>
+        <li class="d-flex">
+                <a class="text-dark"
+                        href="{% url 'computer-list' %}">Computers</a>
+                <a class=""
+                        href="{% url 'supplier-create' %}">
+                        <span
+                                class="material-symbols-outlined text-dark small px-5">
+                                add_circle
+                        </span>
+                </a>
+        </li>
+        <li class="d-flex">
+                <a class="text-dark"
+                        href="{% url 'employee-list' %}">Employee</a>
+
+                <a class="float-"
+                        href="{% url 'supplier-create' %}">
+                        <span
+                                class="material-symbols-outlined text-dark small px-5">
+                                add_circle
+                        </span>
+                </a>
+        </li>
+        <li class="d-flex">
+                <a class="text-dark"
+                        href="{% url 'supplier-list' %}">Suppliers</a>
+                <a class="float-end"
+                        href="{% url 'supplier-create' %}">
+                        <span
+                                class="material-symbols-outlined text-dark small px-5">
+                                add_circle
+                        </span>
+                </a>
+        </li>
+</div>

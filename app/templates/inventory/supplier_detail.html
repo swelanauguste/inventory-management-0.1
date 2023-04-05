@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+{{object}} -
+{% endblock head_title %}
+{% block content %}
+<div class="container">
+    <div class="border-end rounded-0 p-5">
+        <div class="display-4">{{object}}</div>
+        <hr>
+        <p>Address: {{object.address}}</p>
+        <p>Phone: <a class="text-dark"
+                href="tel:{{object.phone}}"> {{object.phone}}</a></p>
+        <p>Email: <a class="text-dark"
+                href="mailto:{{object.email}}">{{object.email}}</a></p>
+        <br>
+        <a class="btn btn-outline-dark px-5 rounded-pill"
+            href="{% url 'supplier-update' object.pk %}">Edit</a>
+    </div>
+</div>
+
+{% endblock content %}

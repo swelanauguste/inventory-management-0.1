@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}
+Items -
+{% endblock head_title %}
+
+
+{% block content %}
+{% include 'go_back.html' %}
+
+<div class="container col-lg-12 mx-auto">
+    <div class="py-5 col-lg-6 mx-auto">
+        <form action=""
+            method="get">
+            <input class="form-control rounded-pill"
+                autofocus
+                type="text"
+                placeholder="Search items..."
+                name="items">
+        </form>
+    </div>
+    <div class="row">
+        <div class="col">
+            <span class="h1 px-5">Items</span>
+        </div>
+        <div class="col">
+            <a class="float-end"
+                href="{% url 'item-create' %}"><span
+                    class="material-symbols-outlined text-dark fs-1 px-5">
+                    add_circle
+                </span></a>
+        </div>
+    </div>
+    <hr><br>
+    <div class="table-responsive">
+        <table class="table table-sm table-hover small">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Supplier</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Price</th>
+                    <th class="text-end"
+                        scope="col">Total Cost</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ob in object_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td><a class="text-dark"
+                            href="{{ob.get_absolute_url}}">{{ob.name}}</a>
+                    </td>
+                    <td>{{ob.category}}</td>
+                    <td><a class="text-dark"
+                            href="{{ob.supplier.get_absolute_url}}">{{ob.supplier.name|default:'-'}}</a>
+                    </td>
+                    <td>{{ob.get_item_total_count}}</td>
+                    <td>XCD${{ob.price}}</td>
+                    <td class="text-end">XCD${{ob.get_total_cost}}</td>
+                    <td class="text-end">
+                        <a class=""
+                            href="{% url 'item-receive-create' ob.pk %}"><span
+                                class="material-symbols-outlined text-success">
+                                add_circle
+                            </span></a>
+                    </td>
+                    <td class="text-start">
+                        <a class=""
+                            href="{% url 'item-give-create' ob.pk %}"><span
+                                class="material-symbols-outlined text-danger">
+                                do_not_disturb_on
+                            </span></a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7"
+                        class="text-center fs-4">
+                        No Items
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

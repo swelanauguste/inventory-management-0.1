@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head_title %}
+
+{% endblock head_title %}
+
+{% block content %}
+<div class="container">
+    <a class="btn btn-lg btn-outline-primary rounded-4 p-5 me-5 shadow my-3"
+        style="min-width: 15%;"
+        href="{% url 'computer-list' %}">Computers</a>
+    <a class="disabled btn btn-lg btn-secondary rounded-4 p-5 me-5 shadow my-3"
+        style="min-width: 15%;"
+        href="">Printers</a>
+    <a class="disabled btn btn-lg btn-secondary rounded-4 p-5 me-5 shadow my-3"
+        style="min-width: 15%;"
+        href="">Scanner</a>
+    <hr>
+    <a class="btn btn-lg btn-outline-info rounded-4 p-5 me-5 shadow my-3"
+        style="min-width: 15%;"
+        href="{% url 'item-list' %}">Supplies</a>
+    <hr>
+    <a class=" btn btn-lg btn-outline-danger rounded-4 p-5 me-5 shadow my-3"
+        style="min-width: 15%;"
+        href="{% url 'supplier-list' %}">Suppliers</a>
+    <a class="btn btn-lg btn-outline-dark rounded-4 p-5 me-5 shadow my-3"
+        style="min-width: 15%;"
+        href="{% url 'employee-list' %}">Employees</a>
+</div>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+{{object.name}} -
+{% endblock head_title %}
+{% block content %}
+<div class="container">
+    {% include 'go_back.html' %}
+    <div class="col-lg-6 mx-auto shadow rounded-4 p-5">
+        <div class="display-4">{{object.name}}</div>
+        <hr>
+        <p>Manufacturer: {{object.manufacturer}}</p>
+        <p>Processor: {{object.processor}} GHz</p>
+        <p>Memory: {{object.memory}} GB</p>
+        <p>Storage: {{object.storage}} GB</p>
+        <hr><br>
+        <div class="text-end">
+            <a class="btn btn-outline-dark rounded-pill px-5"
+                href="{% url 'computer-model-update' object.pk %}">Edit</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

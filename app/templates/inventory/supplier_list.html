@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}
+Suppliers -
+{% endblock head_title %}
+
+
+{% block content %}
+
+{% include 'go_back.html' %}
+
+<div class="container col-lg-12 mx-auto">
+    <div class="py-5 col-lg-6 mx-auto">
+        <form action=""
+            method="get">
+            <input class="form-control rounded-pill"
+                autofocus
+                type="text"
+                placeholder="Search suppliers..."
+                name="suppliers">
+        </form>
+    </div>
+    <div class="row">
+        <div class="col">
+            <span class="h1 px-5">Suppliers</span>
+        </div>
+        <div class="col">
+            <a class="float-end"
+                href="{% url 'supplier-create' %}"><span
+                    class="material-symbols-outlined text-dark fs-1 px-5">
+                    add_circle
+                </span></a>
+        </div>
+    </div>
+    <hr><br>
+    <div class="table-responsive">
+        <table class="table table-sm table-hover small">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ob in object_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td><a class="text-dark"
+                            href="{{ob.get_absolute_url}}">{{ob.name}}</a></td>
+                    <td>{{ob.address}}</td>
+                    <td><a class="text-dark"
+                            href="tel:{{ob.phone}}">{{ob.phone}}</a></td>
+                    <td><a class="text-dark"
+                            href="mailto:{{ob.email}}">{{ob.email}}</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5"
+                        class="text-center fs-4">
+                        No Suppliers
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

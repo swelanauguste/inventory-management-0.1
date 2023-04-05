@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}
+Computer Models -
+{% endblock head_title %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <span class="h1 px-5">Computer Models</span>
+        </div>
+        <div class="col">
+            <a class="float-end"
+                href="{% url 'computer-model-create' %}"><span
+                    class="material-symbols-outlined text-dark fs-1 px-5">
+                    add_circle
+                </span></a>
+        </div>
+    </div>
+    <hr><br>
+    <div class="mx-auto p-5 border-start rounded-0">
+        <div class="table-responsive">
+            <table class="table table-sm table-hover small">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Manufacturer</th>
+                        <th scope="col">Processor</th>
+                        <th scope="col">Memory</th>
+                        <th scope="col">Storage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ob in object_list %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td><a class="text-dark"
+                                href="{{ob.get_absolute_url}}">{{ob.name}}</a>
+                        <td>{{ob.manufacturer}}</td>
+                        <td>{{ob.processor}}GHz</td>
+                        <td>{{ob.memory}}GB</td>
+                        <td>{{ob.storage}}GB</td>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2"
+                            class="text-center fs-4">
+                            No Computer Models
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

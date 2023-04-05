@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+{{object}} -
+{% endblock head_title %}
+
+{% block content %}
+{% include 'go_back.html' %}
+
+<div class="container">
+    <div class="rounded-0 p-5">
+        <div class="display-4">{{object}}</div>
+        <hr>
+        <div class="container">
+            <p>Category: {{object.category}}</p>
+            <p>Supplier: <a class="text-dark"
+                    href="{{object.supplier.get_absolute_url}}">
+                    {{object.supplier}}</a></p>
+            <p>Quantity: {{object.get_item_total_count}}
+            </p>
+            <p>Price: XCD${{object.price}}</p>
+            <p class="fs-4">Total: XCD${{object.get_total_cost}}</p>
+        </div>
+        <hr><br>
+    </div>
+</div>
+{% endblock content %}

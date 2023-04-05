@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+{{object.serial_number}} -
+{% endblock head_title %}
+
+{% block content %}
+{% include 'go_back.html' %}
+
+<div class="container">
+    <div class="p-5">
+        <div class="display-4">{{object.serial_number}}</div>
+        <hr>
+        <div class="container">
+            <p>Manufacturer: {{object.model.manufacturer}}</p>
+            <p>Model: <a class="text-dark"
+                    href="{{object.model.get_absolute_url}}">
+                    {{object.model.name}}</a></p>
+            <p>Supplier: <a class="text-dark"
+                    href="{{object.supplier.get_absolute_url}}">{{object.supplier}}</a>
+            </p>
+            <p>Owner: <a class="text-dark"
+                    href="{{object.computer_assignments.last.employee.get_absolute_url}}">{{object.computer_assignments.last.employee|default_if_none:'unassigned'}}</a>
+            </p>
+        </div>
+        <br>
+        <div class="d-flex">
+
+            {% if object.computer_assignments.last.employee %}
+            <a class="btn btn-outline-dark rounded-pill px-5 me-3"
+                href="{% url 'computer-unassignment-create' object.pk %}">Unassign</a>
+            {% else %}
+            <a class="btn btn-outline-dark rounded-pill px-5 me-3"
+            href="{% url 'computer-assignment-create' object.pk %}">Assign</a>
+            {% endif %}
+            <a class="btn btn-dark rounded-pill px-5"
+                href="{% url 'computer-update' object.pk %}">Edit</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

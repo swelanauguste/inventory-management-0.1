@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}
+Computer Assignments -
+{% endblock head_title %}
+
+
+{% block content %}
+{% include 'go_back.html' %}
+<div class="row">
+    <div class="col">
+        <span class="h1 px-5">Computer Assignments</span>
+        <hr><br>
+        <div class="table-responsive">
+            <table class="table table-sm table-hover small">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Employee</th>
+                        <th scope="col">Computer</th>
+                        <th scope="col">Date Assigned</th>
+                        <th scope="col">Date Returned</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ob in object_list %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td><a class="text-dark"
+                                href="{{ob.employee.get_absolute_url}}">{{ob.employee|default:'unassigned'}}</a>
+                        </td>
+                        <td><a class="text-dark"
+                                href="{{ob.computer.get_absolute_url}}">{{ob.computer.serial_number}}</a>
+                        </td>
+                        <td>{{ob.date_assigned}}</td>
+                        <td>{{ob.date_returned|default:'-'}}</td>
+                        <td><a class="text-dark"
+                                href="{% url 'computer-assignment-update' ob.pk %}">Assignment</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5"
+                            class="text-center fs-4">
+                            No Items
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-2 rounded-0 border-start py-4 mx-5 mt-lg-5">
+        <li> <a class="text-dark"
+                href="{% url 'computer-list' %}">Computers</a></li>
+        <li> <a class="disabled text-dark"
+                href="{% url 'employee-list' %}">Employees</a></li>
+
+    </div>
+</div>
+{% endblock content %}

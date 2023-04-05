@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+{{object}} -
+{% endblock head_title %}
+{% block content %}
+
+<form action=""
+    enctype="multipart/form-data"
+    method="post">
+    {% csrf_token %}
+    <div id='form-errors'>{{ form_errors }}</div>
+    <div class="rounded-o border-start p-5 col-lg-4 mx-auto">
+        <h2>{{object}}</h2>
+        <hr>
+        {{form|crispy}}
+        <div class="my-3 text-end">
+            <button class="btn btn-outline-dark rounded-pill"
+                type="submit">Submit</button>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

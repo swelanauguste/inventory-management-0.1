@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+{{object}} -
+{% endblock head_title %}
+{% block content %}
+{% include 'go_back.html' %}
+<div class="container">
+    <div class="border-end rounded-0 p-5">
+        <div class="display-4">{{object}}</div>
+        <hr>
+        <p>Extension: {{object.ext}}</p>
+        <p>Computer: <a class="text-dark"
+                href="{{object.computer_assignments.last.computer.get_absolute_url}}">
+                {{object.computer_assignments.last.computer.serial_number}}</a>
+        </p>
+        <br>
+        <a class="btn btn-outline-dark rounded-pill px-5"
+            href="{% url 'employee-update' object.pk %}">Edit</a>
+    </div>
+</div>
+{% endblock content %}

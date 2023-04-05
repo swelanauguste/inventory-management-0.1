@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+Add -
+{% endblock head_title %}
+{% block content %}
+{% include 'go_back.html' %}
+<form action=""
+    enctype="multipart/form-data"
+    method="post">
+    {% csrf_token %}
+    <div class="col-lg-4 mx-auto mt-5 shadow rounded-4 p-5">
+        <h2>Form</h2>
+        <hr>
+        <div id='form-errors'>{{ form_errors }}</div>
+        {{form|crispy}}
+        <br>
+        <div class="my-3 text-end">
+            <button class="btn btn-outline-dark rounded-pill px-5"
+                type="submit">Submit</button>
+            <br><br>
+            <a class="text-muted small"
+                target="_blank"
+                href="{% url 'manufacturer-create' %}">Add a manufacturer</a>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}
