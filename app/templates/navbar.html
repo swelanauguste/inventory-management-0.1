@@ -1,5 +1,5 @@
 {% load static %}
-<nav class="row border sticky-top bg-white">
+<nav class="row sticky-top bg-white">
     <div class="col">
         <div class="d-flex py-lg-2 px-lg-5 p-3 bg-white">
             <a class="h3 text-decoration-none text-dark fw-bold me-4"
@@ -21,6 +21,10 @@
                     <li><a class="dropdown-item"
                             href="{{request.user.profile.get_absolute_url}}">User
                             Profile</a>
+                    </li>
+                    <li><a class="dropdown-item"
+                            href="{% url 'account_email' %}">Change
+                            email</a>
                     </li>
                     <hr class="m-0 p-0">
                     <li><a class="dropdown-item"

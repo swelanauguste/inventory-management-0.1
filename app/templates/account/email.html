@@ -1,10 +1,13 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block head_title %}{% trans "E-mail Addresses" %}{% endblock %}
 
 {% block content %}
+<div class="container mt-5">
+  <div class="col-lg-8 mx-auto p-5 rounded-4 border bg-dark text-white">
     <h1>{% trans "E-mail Addresses" %}</h1>
 {% if user.emailaddress_set.all %}
 <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
@@ -31,11 +34,11 @@
   {% endfor %}
 
 <div class="buttonHolder">
-      <button class="secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-      <button class="secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-      <button class="primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+      <button class="btn btn-outline-primary px-5 rounded-pill" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
+      <button class="btn btn-primary px-5 rounded-pill" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+      <button class="btn btn-danger px-5 rounded-pill" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
 </div>
-
+<hr>
 </fieldset>
 </form>
 
@@ -46,14 +49,16 @@
 
   {% if can_add_email %}
     <h2>{% trans "Add E-mail Address" %}</h2>
-
     <form method="post" action="{% url 'account_email' %}" class="add_email">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="action_add" type="submit">{% trans "Add E-mail" %}</button>
+        <div class="col-lg-4">
+        {{ form|crispy }}
+      </div>
+        <button class="btn btn-outline-light px-5 rounded-pill" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
     </form>
   {% endif %}
-
+</div>
+</div>
 {% endblock %}
 
 
