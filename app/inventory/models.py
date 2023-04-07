@@ -9,9 +9,10 @@ User = settings.AUTH_USER_MODEL
 
 class Supplier(models.Model):
     name = models.CharField(max_length=255)
-    address = models.TextField()
-    phone = models.CharField(max_length=20)
-    email = models.EmailField()
+    address = models.CharField(max_length=200, null=True)
+    address1 = models.CharField(max_length=200, null=True, blank=True)
+    phone = models.CharField(max_length=20, blank=True)
+    email = models.EmailField(blank=True)
 
     def get_absolute_url(self):
         return reverse("supplier-detail", kwargs={"pk": self.pk})
@@ -159,11 +160,22 @@ class ComputerModel(models.Model):
         return f" {self.manufacturer} {self.name}"
 
 
+# class PrintTechnology(models.Model):
+#     name = models.CharField(max_length=255)
+
+#     def __str__(self):
+#         return self.name
+
+
 class PrinterModel(models.Model):
     name = models.CharField(max_length=255)
-    manufacturer = models.CharField(max_length=255)
-    print_technology = models.CharField(max_length=255, blank=True)
-    print_color = models.CharField(max_length=255, blank=True)
+    manufacturer = models.ForeignKey(
+        Manufacturer, on_delete=models.CASCADE, null=True, blank=True
+    )
+    # print_technology = models.ForeignKey(
+    #     PrintTechnology, on_delete=models.CASCADE, null=True, blank=True
+    # )
+    colour_printer = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}
+Printers -
+{% endblock head_title %}
+
+
+{% block content %}
+
+{% include 'go_back.html' %}
+
+<div class="container col-lg-12 mx-auto">
+    <div class="py-5 col-lg-6 mx-auto">
+        <form action=""
+            method="get">
+            <input class="form-control rounded-pill"
+                autofocus
+                type="text"
+                placeholder="Search computers..."
+                name="computers">
+        </form>
+    </div>
+    <div class="row">
+        <div class="col">
+            <span class="h1 px-5">Printers</span>
+        </div>
+        <div class="col">
+            <a class="float-end"
+                href="{% url 'printer-create' %}"><span
+                    class="material-symbols-outlined text-dark fs-1 px-5">
+                    add_circle
+                </span></a>
+        </div>
+    </div>
+    <hr><br>
+    <div class="table-responsive">
+        <table class="table table-sm table-hover small">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Serial number</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Supplier</th>
+                    <th scope="col">Assignment</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ob in object_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td><a class="text-dark"
+                            href="{{ob.get_absolute_url}}">{{ob.serial_number}}</a>
+                    </td>
+                    <td>{{ob.model}}</td>
+                    <td><a class="text-dark"
+                            href="{{ob.supplier.get_absolute_url}}">{{ob.supplier.name|default:'-'}}</a>
+                    </td>
+                    <td><a class="text-dark"
+                            href="{{ob.computer_assignments.last.employee.get_absolute_url}}">{{ob.computer_assignments.last.employee|default_if_none:'unassigned'}}</a>
+                    </td>
+                    <td>
+                        {% if ob.computer_assignments.last.employee != None %}
+                        <a title="unassign"
+                            class="text-dark text-decoration-none"
+                            href="{% url 'computer-unassignment-create' ob.pk %}">
+                            <span
+                                class="material-symbols-outlined text-primary">
+                                link_off
+                            </span>
+                        </a>
+                        {% else %}
+                        <a title="assign"
+                            class="text-dark text-decoration-none me-2"
+                            href="{% url 'computer-assignment-create' ob.pk %}">
+                            <span
+                                class="material-symbols-outlined text-success">
+                                add_link
+                            </span>
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6"
+                        class="text-center fs-4">
+                        No Printers
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

@@ -35,31 +35,55 @@ from .models import (
 )
 
 
+class PrinterListView(LoginRequiredMixin, ListView):
+    model = Printer
+
+
+class PrinterCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Printer
+    fields = "__all__"
+    success_url = reverse_lazy("printer-list")
+    success_message = "%(name)s was created successfully"
+
+
+class PrinterUpdateView(SuccessMessageMixin, UpdateView):
+    model = Printer
+    fields = "__all__"
+    success_message = "%(name)s was updated successfully"
+
+
+class PrinterDetailView(LoginRequiredMixin, DetailView):
+    model = Printer
+
+
 class ReceiveItemCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = ReceiveItem
-    fields = "__all__"
+    fields = ["item", "qty"]
     success_url = reverse_lazy("item-list")
-    success_message = "%(item)s was added successfully"
+    success_message = "%(qty)s %(item)s(s) were added"
 
     def get_initial(self):
         return {"item": self.kwargs["pk"]}
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        form.instance.updated_by = self.request.user
+        return super().form_valid(form)
 
 
 class GiveItemCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = GiveItem
-    fields = "__all__"
+    fields = ["item", "qty"]
     success_url = reverse_lazy("item-list")
-    success_message = "%(item)s was removed successfully"
+    success_message = "%(qty)s %(item)s(s) were removed"
 
     def get_initial(self):
         return {"item": self.kwargs["pk"]}
 
-
-# class ReceiveItemUpdateView(SuccessMessageMixin, UpdateView):
-#     model = ReceiveItem
-#     fields = "__all__"
-#     success_url = reverse_lazy("computer-assignment-list")
-#     success_message = "%(computer)s details updated successfully"
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        form.instance.updated_by = self.request.user
+        return super().form_valid(form)
 
 
 class ComputerAssignmentListView(LoginRequiredMixin, ListView):
@@ -76,9 +100,7 @@ class ComputerAssignmentCreateView(LoginRequiredMixin, SuccessMessageMixin, Crea
         return {"computer": self.kwargs["pk"]}
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         context["computer_name"] = Computer.objects.get(pk=self.kwargs["pk"])
         return context
 
@@ -176,6 +198,27 @@ class ComputerModelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateVie
 
 class ComputerModelDetailView(LoginRequiredMixin, DetailView):
     model = ComputerModel
+
+
+class PrinterModelListView(LoginRequiredMixin, ListView):
+    model = PrinterModel
+
+
+class PrinterModelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = PrinterModel
+    fields = "__all__"
+    success_url = reverse_lazy("printer-model-list")
+    success_message = "%(name)s was created successfully"
+
+
+class PrinterModelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = PrinterModel
+    fields = "__all__"
+    success_message = "%(name)s was updated successfully"
+
+
+class PrinterModelDetailView(LoginRequiredMixin, DetailView):
+    model = PrinterModel
 
 
 class CategoryListView(LoginRequiredMixin, ListView):
