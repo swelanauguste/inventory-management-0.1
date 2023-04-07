@@ -140,6 +140,15 @@ class ComputerAssignmentDetailView(LoginRequiredMixin, DetailView):
 class EmployeeListView(LoginRequiredMixin, ListView):
     model = Employee
 
+    def get_queryset(self):
+        query = self.request.GET.get("employees")
+        if query:
+            return Employee.objects.filter(
+                Q(name__icontains=query) | Q(ext__icontains=query)
+            ).distinct()
+        else:
+            return Employee.objects.all()
+
 
 class EmployeeCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Employee
@@ -244,6 +253,7 @@ class CategoryDetailView(LoginRequiredMixin, DetailView):
 
 class ComputerListView(LoginRequiredMixin, ListView):
     model = Computer
+    paginate_by = 10
 
     def get_queryset(self):
         query = self.request.GET.get("computers")

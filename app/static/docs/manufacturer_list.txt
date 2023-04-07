@@ -1,0 +1,7 @@
+dell
+hp
+brother
+xerox
+acer
+asus
+other

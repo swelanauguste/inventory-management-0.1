@@ -14,6 +14,9 @@ class Supplier(models.Model):
     phone = models.CharField(max_length=20, blank=True)
     email = models.EmailField(blank=True)
 
+    class Meta:
+        ordering = ("name",)
+
     def get_absolute_url(self):
         return reverse("supplier-detail", kwargs={"pk": self.pk})
 
@@ -192,9 +195,13 @@ class ScannerModel(models.Model):
 
 
 class Computer(models.Model):
-    serial_number = models.CharField(max_length=255, unique=True)
-    model = models.ForeignKey(ComputerModel, on_delete=models.CASCADE)
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    serial_number = models.CharField(max_length=255, unique=True, db_index=True)
+    model = models.ForeignKey(
+        ComputerModel, on_delete=models.CASCADE, related_name="computer"
+    )
+    supplier = models.ForeignKey(
+        Supplier, on_delete=models.CASCADE, related_name="computers"
+    )
 
     def get_absolute_url(self):
         return reverse("computer-detail", kwargs={"pk": self.pk})

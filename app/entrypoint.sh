@@ -10,10 +10,14 @@
 
 #     echo "PostgreSQL started"
 # fi
-# python manage.py flush --noinput
+python manage.py flush --noinput
 python manage.py makemigrations
 python manage.py migrate
-python manage.py migrate --run-syncdb
+python manage.py add_manufacturers
+python manage.py add_employees
+python manage.py add_suppliers
+python manage.py add_computers
+# python manage.py migrate --run-syncdb
 python manage.py createsuperuser --username kingship --email kingship.lc@gmail.com --noinput
 
 python manage.py collectstatic --noinput
